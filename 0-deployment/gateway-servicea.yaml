@@ -1,0 +1,30 @@
+apiVersion: networking.istio.io/v1alpha3
+kind: Gateway
+metadata:
+  name: servicea-gateway
+spec:
+  selector:
+    istio: ingressgateway
+  servers:
+  - port:
+      number: 80
+      name: http
+      protocol: HTTP
+    hosts:
+    - "servicea.co.th"
+---
+apiVersion: networking.istio.io/v1alpha3
+kind: VirtualService
+metadata:
+  name: servicea-external
+spec:
+  hosts:
+  - "servicea.co.th"
+  gateways:
+  - servicea-gateway
+  http:
+  - route:
+    - destination:
+        host: servicea
+        port:
+          number: 1323

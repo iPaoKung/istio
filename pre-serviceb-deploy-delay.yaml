@@ -1,0 +1,132 @@
+# Copyright 2017 iPao Authors
+#
+#   Unless required by applicable law or agreed to in writing, software
+#   distributed under the License is distributed on an "AS IS" BASIS,
+#   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+#   See the License for the specific language governing permissions and
+#   limitations under the License.
+
+##################################################################################################
+# serviceb service
+##################################################################################################
+apiVersion: v1
+kind: Service
+metadata:
+  name: serviceb
+  labels:
+    app: serviceb
+    service: serviceb
+spec:
+  ports:
+  - name: http
+    port: 1323
+  selector:
+    app: serviceb
+
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: svcacc-serviceb
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviceb-v1
+  labels:
+    app: serviceb
+    version: v1
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serviceb
+      version: v1
+  template:
+    metadata:
+      labels:
+        app: serviceb
+        version: v1
+    spec:
+      serviceAccountName: svcacc-serviceb
+      containers:
+      - name: serviceb
+        image: techinno/service_b:1
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 1323
+        env: 
+        - name: HOST
+          value: "https://httpbin.org"
+        - name: PORT
+          value: ""
+        - name: URI
+          value: "/delay/1"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviceb-v2
+  labels:
+    app: serviceb
+    version: v2
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serviceb
+      version: v2
+  template:
+    metadata:
+      labels:
+        app: serviceb
+        version: v2
+    spec:
+      serviceAccountName: svcacc-serviceb
+      containers:
+      - name: serviceb
+        image: techinno/service_b:2
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 1323
+        env: 
+        - name: HOST
+          value: "https://httpbin.org"
+        - name: PORT
+          value: ""
+        - name: URI
+          value: "/delay/3"
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: serviceb-v3
+  labels:
+    app: serviceb
+    version: v3
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: serviceb
+      version: v3
+  template:
+    metadata:
+      labels:
+        app: serviceb
+        version: v3
+    spec:
+      serviceAccountName: svcacc-serviceb
+      containers:
+      - name: serviceb
+        image: techinno/service_b:3
+        imagePullPolicy: IfNotPresent
+        ports:
+        - containerPort: 1323
+        env: 
+        - name: HOST
+          value: "https://httpbin.org"
+        - name: PORT
+          value: ""
+        - name: URI
+          value: "/delay/5"
