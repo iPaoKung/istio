@@ -8,8 +8,8 @@ spec:
   http:
   - match:
     - headers:
-        Device:
-          exact: iphone
+        Segment:
+          exact: Platinum
     route:
     - destination:
         host: serviceb
@@ -17,8 +17,8 @@ spec:
 
   - match:
     - headers:
-        Device:
-          exact: android
+        Segment:
+          exact: Gold
     route:
     - destination:
         host: serviceb
