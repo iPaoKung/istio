@@ -11,9 +11,8 @@ spec:
         host: serviceb
         port:
           number: 1323
-        subset: v1
       headers:
         request:
           add:
             "X-Service-Name" : "Service B"
-    timeout: 3s
+    timeout: 4s

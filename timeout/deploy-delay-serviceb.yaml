@@ -57,7 +57,7 @@ spec:
         - containerPort: 1323
         env: 
         - name: HOST
-          value: "https://httpbin.org"
+          value: "http://httpbin:8000"
         - name: PORT
           value: ""
         - name: URI
@@ -91,7 +91,7 @@ spec:
         - containerPort: 1323
         env: 
         - name: HOST
-          value: "https://httpbin.org"
+          value: "http://httpbin:8000"
         - name: PORT
           value: ""
         - name: URI
@@ -125,7 +125,7 @@ spec:
         - containerPort: 1323
         env: 
         - name: HOST
-          value: "https://httpbin.org"
+          value: "http://httpbin:8000"
         - name: PORT
           value: ""
         - name: URI
