@@ -22,17 +22,7 @@ spec:
         port:
           number: 1323
         subset: v2
-      weight: 5
-      headers:
-        request:
-          add:
-            "X-Service-Name" : "Service B"
-    - destination:
-        host: serviceb
-        port:
-          number: 1323
-        subset: v3
-      weight: 5
+      weight: 10
       headers:
         request:
           add:
